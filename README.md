@@ -1,7 +1,7 @@
 
 # React + Next + Javascript Workshop - Draft
 
-Welcome to the **Gah Code React Workshop** repository! This project is designed to help you explore and practice modern JavaScript and React development. It includes practical examples, exercises, and notes on best practices that will guide you through core concepts—from basic JavaScript array methods to advanced React component management.
+Welcome to the **Workshop** repository! This project is designed to help you explore and practice modern JavaScript and React development. It includes practical examples, exercises, and notes on best practices that will guide you through core concepts—from basic JavaScript array methods to advanced React component management.
 
 ---
 
