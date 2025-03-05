@@ -3,112 +3,53 @@ import viteLogo from '/vite.svg';
 import './index.css';
 
 import { useState } from 'react';
-
-const skills = [
-  {
-    skill: 'HTML+CSS',
-    level: 'advanced',
-    color: '#2662EA',
-  },
-  {
-    skill: 'JavaScript',
-    level: 'advanced',
-    color: '#EFD81D',
-  },
-  {
-    skill: 'Web Design',
-    level: 'advanced',
-    color: '#C3DCAF',
-  },
-  {
-    skill: 'Git and GitHub',
-    level: 'intermediate',
-    color: '#E84F33',
-  },
-  {
-    skill: 'React',
-    level: 'advanced',
-    color: '#60DAFB',
-  },
-  {
-    skill: 'Svelte',
-    level: 'beginner',
-    color: '#FF3B00',
-  },
-];
-
-const messages = [
-  'Learn React ⚛️',
-  'Apply for jobs 💼',
-  'Invest your new income 🤑',
-];
+import Logo from './Logo';
+import Form from './Form';
+import PackingList from './PackingList';
+import Stats from './Stats';
 
 function App() {
-  const style = {};
+  const [items, setItems] = useState([]);
+
+  function handleAddItems(item) {
+    setItems((items) => [...items, item]);
+  }
+  function handleDeleteItem(id) {
+    setItems((items) => items.filter((item) => item.id !== id));
+  }
+
+  function handleToggleItem(id) {
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  }
+
+  function handleClearList() {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete all items?'
+    );
+
+    if (confirmed) setItems([]);
+  }
 
   return (
-    <div>
-      <Steps />
-      <div className='card'>
-        <SkillList />
-      </div>
-    </div>
-  );
-}
-function Steps() {
-  const [step, setStep] = useState(1);
-  return (
-    <div>
-      <button> &times;</button>
-      <div className='steps'>
-        <div className='numbers'>
-          {/* is step greater or equal to one ? if so should be the string of active if not nothing   */}
-          <div className={step >= 1 ? 'active' : ''}>1</div>
-          <div className={step >= 2 ? 'active' : ''}>2</div>
-          <div className={step >= 3 ? 'active' : ''}>3</div>
-        </div>
-        <p className='message'>
-          Step {step}: {messages[step - 1]}
-          {/* {test.name} */}
-        </p>
-        <div className='buttons'>
-          {/* HANDLE EVENTS THE REACT WAY */}
-          <button style={{ backgroundColor: '#7950f2', color: '#fff' }}>
-            Previous
-          </button>
-          <button style={{ backgroundColor: '#7950f2', color: '#fff' }}>
-            Next
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function SkillList() {
-  return (
-    <div className='skill-list'>
-      {skills.map((skill) => (
-        <Skill skill={skill.skill} color={skill.color} level={skill.level} />
-      ))}
+    <div className='app'>
+      <Logo />
+      <Form onAddItems={handleAddItems} />
+      <PackingList
+        items={items}
+        onDeleteItem={handleDeleteItem}
+        onToggleItem={handleToggleItem}
+        onClearList={handleClearList}
+      />
+      <Stats />
     </div>
   );
 }
 
-///
-
-function Skill({ skill, color, level }) {
-  return (
-    <div className='skill' style={{ backgroundColor: color }}>
-      <span>{skill}</span>
-      <span>
-        {level === 'beginner' && '👶'}
-        {level === 'intermediate' && '👍'}
-        {level === 'advanced' && '💪'}
-      </span>
-    </div>
-  );
-}
+//
 
 export default App;
 

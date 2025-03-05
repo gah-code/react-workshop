@@ -145,22 +145,23 @@ const data = [
 
 //// Extract Titles of Books
 ///
+const countCompletedTodos = async () => {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+    const todos = await response.json();
 
-const sortedBooks = [...data].sort(
-  (a, b) => new Date(a.publicationDate) - new Date(b.publicationDate)
-);
+    const todoCounts = todos.reduce(
+      (acc, todo) => {
+        acc[todo.completed ? 'completed' : 'incomplete']++;
+        return acc;
+      },
+      { completed: 0, incomplete: 0 }
+    );
 
-console.log('Shorted Books by Date', sortedBooks);
+    console.log('Completed vs. Incomplete Todos:', todoCounts);
+  } catch (error) {
+    console.error('Error fetching todos:', error.message);
+  }
+};
 
-// async function getTodos() {
-//   const res = await fetch('https://jsonplaceholder.typicode.com/todos');
-//   const data = await res.json();
-//   console.log(data);
-
-//   return data;
-// }
-
-// const todos = getTodos();
-// console.log(todos);
-
-// https://jsonplaceholder.typicode.com/users/1/todos
+countCompletedTodos();
