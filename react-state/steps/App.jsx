@@ -1,5 +1,3 @@
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './index.css';
 
 import { useState } from 'react';
@@ -10,7 +8,7 @@ const messages = [
   'Invest your new income 🤑',
 ];
 
-function App() {
+export default function StepsComponent() {
   const style = {};
 
   return (

@@ -7,6 +7,7 @@ import Logo from './Logo';
 import Form from './Form';
 import PackingList from './PackingList';
 import Stats from './Stats';
+// import StepsComponent from '../react-state/steps/App';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -44,7 +45,8 @@ function App() {
         onToggleItem={handleToggleItem}
         onClearList={handleClearList}
       />
-      <Stats />
+      <Stats items={items} />
+      {/* <StepsComponent /> */}
     </div>
   );
 }
