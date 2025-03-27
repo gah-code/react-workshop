@@ -16,7 +16,7 @@ const faqs = [
   },
 ];
 
-export default function App() {
+export default function AppSeven() {
   return (
     <div>
       <Accordion data={faqs} />
@@ -45,7 +45,7 @@ function Accordion({ data }) {
         curOpen={curOpen}
         onOpen={setCurOpen}
         title='Test 1'
-        num={22}
+        num={3}
         key='test 1'
       >
         <p>Allows React developers to:</p>

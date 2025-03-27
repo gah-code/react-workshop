@@ -1,15 +1,54 @@
-// import '../react-exercises/eat-n-split/style.css';
-// import './index.css';
-// import '../react-exercises/eat-n-split/style.css';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './index.css';
 
-import EatApp from '../react-exercises/eat-n-split/App';
-
+import { useState } from 'react';
+import Logo from './Logo';
+import Form from './Form';
+import PackingList from './PackingList';
+import Stats from './Stats';
+import AppSeven from '../react-state/accordion-two/App';
 // import StepsComponent from '../react-state/steps/App';
 
 function App() {
+  const [items, setItems] = useState([]);
+
+  function handleAddItems(item) {
+    setItems((items) => [...items, item]);
+  }
+  function handleDeleteItem(id) {
+    setItems((items) => items.filter((item) => item.id !== id));
+  }
+
+  function handleToggleItem(id) {
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  }
+
+  function handleClearList() {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete all items?'
+    );
+
+    if (confirmed) setItems([]);
+  }
+
   return (
-    <div>
-      <EatApp />
+    <div className='app'>
+      <Logo />
+      <Form onAddItems={handleAddItems} />
+      <PackingList
+        items={items}
+        onDeleteItem={handleDeleteItem}
+        onToggleItem={handleToggleItem}
+        onClearList={handleClearList}
+      />
+      <Stats items={items} />
+      <AppSeven />
+      {/* <StepsComponent /> */}
     </div>
   );
 }
